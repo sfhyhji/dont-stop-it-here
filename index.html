@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> صل على النبي </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    height:100vh;
+    background: radial-gradient(circle at top,#1b2a49,#0b132b);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* ✨ النجوم */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:url("https://www.transparenttextures.com/patterns/stardust.png");
+    animation: moveStars 60s linear infinite;
+    opacity:.4;
+}
+
+@keyframes moveStars{
+    from{background-position:0 0;}
+    to{background-position:10000px 5000px;}
+}
+
+/* 🌙 القمر */
+.moon{
+    position:absolute;
+    top:60px;
+    right:80px;
+    width:100px;
+    height:100px;
+    background:radial-gradient(circle,#fffacd,#f5deb3);
+    border-radius:50%;
+    box-shadow:0 0 40px #fff;
+}
+
+/* ✉️ الظرف */
+.envelope{
+    position:relative;
+    width:260px;
+    height:160px;
+    cursor:pointer;
+    transition:1s;
+}
+
+.envelope-base{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#d4af37;
+    border-radius:10px;
+}
+
+.envelope-top{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#caa72f;
+    clip-path:polygon(0 0,100% 0,50% 60%);
+    transform-origin:top;
+    transition:1s;
+    border-radius:10px 10px 0 0;
+}
+
+.envelope.open .envelope-top{
+    transform:rotateX(180deg);
+}
+
+/* 📜 الرسالة */
+.letter{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%) translateY(100%);
+    width:90%;
+    height:140px;
+    background:white;
+    color:#222;
+    border-radius:8px;
+    padding:15px;
+    text-align:center;
+    transition:1s;
+    opacity:0;
+}
+
+.envelope.open .letter{
+    transform:translateX(-50%) translateY(-40px);
+    opacity:1;
+}
+
+.letter p{
+    margin-bottom:10px;
+}
+
+/* ✨ نص الضغط */
+.click-text{
+    display:block;
+    margin-top:10px;
+    font-size:14px;
+    color:#caa72f;
+    cursor:pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{opacity:1;}
+    50%{opacity:.5;}
+    100%{opacity:1;}
+}
+
+/* 💌 كارت الحديث */
+.card{
+    position:absolute;
+    width:80%;
+    max-width:500px;
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    transform:scale(0);
+    transition:1s;
+}
+
+.card.show{
+    transform:scale(1);
+}
+
+.card h1{
+    color:#ffd700;
+    margin-bottom:15px;
+}
+
+.card p{
+    line-height:1.8;
+    font-size:18px;
+}
+.share-text{
+    margin-top:25px;
+    font-size:16px;
+    color:#ffd700;
+    opacity:.9;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{opacity:.6;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="moon"></div>
+
+<div class="envelope" id="envelope">
+    <div class="envelope-base"></div>
+    <div class="envelope-top"></div>
+    <div class="letter">
+        <p>
+            خلّي لسانك دايمًا رطب بذكر الله، وصلّي على النبي ✨
+        </p>
+        <span class="click-text">
+            اضغط مرة تانية لعرض الحديث 🤍
+        </span>
+    </div>
+</div>
+
+<div class="card" id="card">
+    <h1> عن ابن مسعود رضي الله عنه </h1>
+    <p>
+        أنَّ رسولَ اللهِ ﷺ قال:
+        أَوْلى النَّاسِ بِي يومَ القيامةِ أَكْثَرُهُم عَلَيَّ صَلاةً
+    </p>
+
+    <div class="share-text">
+        متوقفهاش عندك 🤍 وشاركها تؤجر
+    </div>
+</div>
+
+<script>
+let envelope = document.getElementById("envelope");
+let card = document.getElementById("card");
+
+let opened = false;
+
+envelope.addEventListener("click", function(){
+    if(!opened){
+        envelope.classList.add("open");
+        opened = true;
+    }else{
+        envelope.style.opacity="0";
+        setTimeout(()=>{
+            envelope.style.display="none";
+            card.classList.add("show");
+        },800);
+    }
+});
+</script>
+
+</body>
+</html>
